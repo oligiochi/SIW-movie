@@ -18,13 +18,13 @@ public class MovieController {
     @GetMapping("/movie/{id}")
     public String getMovie(@PathVariable("id") Long id,Model model) {
         model.addAttribute("movie",this.movieService.getMovieById(id));
-        return "movie.html";
+        return "movie";
     }
 
     @GetMapping("/movies")
     public String getMethodName(Model model) {
         model.addAttribute("movies",this.movieService.getAllMovies());
-        return "movies.html";
+        return "movies";
     }
     
     
