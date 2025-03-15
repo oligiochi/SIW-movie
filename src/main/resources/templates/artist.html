@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${artist != null ? artist.name : 'Artista non trovato'}">Artista</title>
+    <link rel="stylesheet" href="/stile.css?version=2" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        img.logo {
+            width: 50%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/"><img src="/logo-siw.png" class="logo" alt="Logo SIW"/></a>
+
+        <div th:if="${artist}">
+            <h1 th:text="${artist.name}">Nome Artista</h1>
+            <div>Anno di nascita: <span th:text="${artist.yearOfBirth != null ? '(' + artist.yearOfBirth + ')' : '(Anno sconosciuto)'}">1970</span></div>
+            <div th:if="${artist.urlImage}">
+                <img width="30%" th:src="${artist.urlImage}" alt="Immagine dell'artista"/>
+            </div>
+        </div>
+
+        <div th:unless="${artist}" class="error">
+            <p>Artista non trovato</p>
+        </div>
+    </div>
+</body>
+
+</html>

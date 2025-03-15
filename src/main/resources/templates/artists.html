@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisti</title>
+    <link rel="stylesheet" href="/stile.css?version=2" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            background: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        img {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        li {
+            background: #007BFF;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: block;
+        }
+        
+        li:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div><a href="/"><img src="/logo-siw.png" alt="Logo" /></a></div>
+        <h1>Artisti</h1>
+        <div th:if="${artists.isEmpty()}">Non ci sono artisti nel sistema</div>
+        <ul>
+            <li th:each="artist : ${artists}">
+                <a th:href="@{'/artist/' + ${artist.id}}" th:text="${artist.name} + ' (' + ${artist.yearOfBirth} + ')'">Leonardo da Vinci (1452)</a>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
