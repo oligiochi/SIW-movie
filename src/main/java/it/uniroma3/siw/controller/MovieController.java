@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import it.uniroma3.siw.service.MovieService;
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -17,8 +19,13 @@ public class MovieController {
 
     @GetMapping("/movie/{id}")
     public String getMovie(@PathVariable("id") Long id,Model model) {
-        model.addAttribute("movie",this.movieService.getMovieById(id));
-        return "movie";
+        try {
+            model.addAttribute("movie", movieService.getMovieById(id));
+            return "movie"; // Assicurati che "movie.html" esista in src/main/resources/templates/
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("errorMessage", "Film con ID " + id + " non trovato");
+            return "error"; // Mostra una pagina di errore personalizzata
+        }
     }
 
     @GetMapping("/movies")

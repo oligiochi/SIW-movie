@@ -1,19 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 
 <head>
-    <title>Film</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${movie != null ? movie.title : 'Film non trovato'}">Film</title>
     <link rel="stylesheet" href="/stile.css?version=2" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        img.logo {
+            width: 50%;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <div><a href="/"><img src="/logo-siw.png" width="50%" /></a></div>
-    <div th:if="${movie}">
-        <h1 th:text="${movie.title}">Titolo film</h1>
-        <div>Anno: <span th:text="'(' + ${movie.year} + ')'">2000</span></div>
-        <!--<span><img width="30%" th:src="${movie.urlImage}" /></span>-->
+    <div class="container">
+        <a href="/"><img src="/logo-siw.png" class="logo" alt="Logo SIW"/></a>
+
+        <div th:if="${movie}">
+            <h1 th:text="${movie.title}">Titolo film</h1>
+            <div>Anno: <span th:text="${movie.year != null ? '(' + movie.year + ')' : '(Anno sconosciuto)'}">2000</span></div>
+            <div th:if="${movie.urlImage}">
+                <img width="30%" th:src="${movie.urlImage}" alt="Immagine del film"/>
+            </div>
+        </div>
+
+        <div th:unless="${movie}" class="error">
+            <p>Film non trovato</p>
+        </div>
     </div>
-    <div th:unless="${movie}">Non esiste</div>
 </body>
 
 </html>
