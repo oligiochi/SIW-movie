@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.repository.MovieRepository;
-import jakarta.persistence.EntityNotFoundException;
+//import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class MovieService {
